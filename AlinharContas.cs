@@ -515,7 +515,6 @@ namespace AnalisardorCartao
                 {
                     LancamentoID = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[11].Value)
                 };
-
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
                     button1.PerformClick();
