@@ -13,11 +13,17 @@ namespace AnalisardorCartao
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            LerArquivos lerArquivos = new LerArquivos(new Precos());
+            try
+            {
+                LerArquivos lerArquivos = new LerArquivos(new Precos());
 
-            lerArquivos.LerArquivoCartao(TxtArquivo.Text, ref dataGridView1);
+                lerArquivos.LerArquivoCartao(TxtArquivo.Text, ref dataGridView1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-
+            }
         }
 
         private void BtnLocalizarArquivo_Click(object sender, EventArgs e)

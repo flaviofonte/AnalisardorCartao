@@ -19,7 +19,12 @@ namespace AnalisardorCartao.Operacoes
                 dataGridView1.Columns.Clear();
                 using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
                 {
-                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    ExcelReaderConfiguration config = new ExcelReaderConfiguration()
+                    {
+                        FallbackEncoding = System.Text.Encoding.UTF8,
+                        AutodetectSeparators = new char[] { ';' }
+                    };
+                    using (var reader = ExcelReaderFactory.CreateReader(stream, config))
                     {
                         do
                         {
@@ -33,31 +38,36 @@ namespace AnalisardorCartao.Operacoes
                                         dataGridView1.Columns.Add(reader.GetValue(1).ToString().Trim(), reader.GetValue(1).ToString());
                                         dataGridView1.Columns.Add(reader.GetValue(7).ToString().Trim(), reader.GetValue(7).ToString());
                                         dataGridView1.Columns.Add(reader.GetValue(9).ToString().Trim(), reader.GetValue(9).ToString());
-                                        dataGridView1.Columns.Add(reader.GetValue(10).ToString().Trim(), reader.GetValue(10).ToString());
-                                        dataGridView1.Columns.Add(reader.GetValue(13).ToString().Trim(), reader.GetValue(13).ToString());
+                                        dataGridView1.Columns.Add(reader.GetValue(12).ToString().Trim(), reader.GetValue(12).ToString());
+                                        dataGridView1.Columns.Add(reader.GetValue(15).ToString().Trim(), reader.GetValue(15).ToString());
                                     }
-
-                                    if (reader.FieldCount >= 13 && reader.GetValue(7) != null && reader.GetValue(10) != null && reader.GetValue(13) != null)
+                                    else if (reader.FieldCount >= 13 && reader.GetValue(9) != null && reader.GetValue(15) != null)
                                     {
-                                        if (double.TryParse(reader.GetValue(13).ToString().Substring(3).Replace(".", ","), out double valor))
+                                        double valorRegistro = 0;
+                                        if (reader.GetValue(15).ToString().Contains("R$") && double.TryParse(reader.GetValue(15).ToString().Substring(3).Replace(".", ","), out double valor))
                                         {
-                                            if (valor > 0.0)
+                                            valorRegistro = valor;
+                                        } else if (double.TryParse(reader.GetValue(15).ToString().Replace(".", ","), out double valor1))
+                                        {
+                                            valorRegistro = valor1;
+                                        }
+                                        if (valorRegistro > 0.0)
+                                        {
+                                            string autorizacao = reader.GetValue(9).ToString().Trim();
+                                            if (autorizacao.Length > 6)
                                             {
-                                                string autorizacao = reader.GetValue(7).ToString().Trim();
-                                                if (autorizacao.Length > 6) {
-                                                    autorizacao = autorizacao.Substring(autorizacao.Length - 6);
-                                                }
-                                                string[] linha = new string[]
-                                                {
+                                                autorizacao = autorizacao.Substring(autorizacao.Length - 6);
+                                            }
+                                            string[] linha = new string[]
+                                            {
                                                     reader.GetValue(0).ToString(),
                                                     reader.GetValue(1).ToString(),
+                                                    reader.GetValue(7) != null ? reader.GetValue(7).ToString() : "",
                                                     autorizacao,
-                                                    reader.GetValue(9) != null ? reader.GetValue(9).ToString() : "",
-                                                    reader.GetValue(10).ToString(),
-                                                    reader.GetValue(13).ToString()
-                                                };
-                                                dataGridView1.Rows.Add(linha);
-                                            }
+                                                    reader.GetValue(12).ToString(),
+                                                    reader.GetValue(15).ToString()
+                                            };
+                                            dataGridView1.Rows.Add(linha);
                                         }
                                     }
                                 }
@@ -79,7 +89,7 @@ namespace AnalisardorCartao.Operacoes
             {
                 DateTime data = DateTime.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString().Substring(0, 10));
                 string nsu = "";
-                string autorizacao = dataGridView1.Rows[i].Cells[2].Value.ToString().Trim();
+                string autorizacao = dataGridView1.Rows[i].Cells[3].Value.ToString().Trim();
                 List<SearchField> filtros = new List<SearchField>()
                 {
                     new SearchField("DataVenda", data, TipoOperacaoEnum.IGUAL),

@@ -19,7 +19,12 @@ namespace AnalisardorCartao.Operacoes
                 dataGridView1.Columns.Clear();
                 using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
                 {
-                    using (var reader = ExcelReaderFactory.CreateReader(stream))
+                    ExcelReaderConfiguration config = new ExcelReaderConfiguration()
+                    {
+                        FallbackEncoding = System.Text.Encoding.UTF8,
+                        AutodetectSeparators = new char[] { ';' }
+                    };
+                    using (var reader = ExcelReaderFactory.CreateReader(stream, config))
                     {
                         do
                         {
@@ -34,7 +39,10 @@ namespace AnalisardorCartao.Operacoes
                                             if (reader.GetValue(i) != null)
                                             {
                                                 string s = reader.GetValue(i).ToString();
-                                                dataGridView1.Columns.Add(s, s);
+                                                if (!string.IsNullOrWhiteSpace(s))
+                                                {
+                                                    dataGridView1.Columns.Add(s, s);
+                                                }
                                             }
                                         }
                                     }
@@ -47,7 +55,10 @@ namespace AnalisardorCartao.Operacoes
                                             if (reader.GetValue(i) != null)
                                             {
                                                 string s = reader.GetValue(i).ToString();
-                                                linha.Add(s);
+                                                if (!string.IsNullOrWhiteSpace(s))
+                                                {
+                                                    linha.Add(s);
+                                                }
                                             }
                                         }
                                         string[] ar = linha.ToArray();
@@ -73,9 +84,9 @@ namespace AnalisardorCartao.Operacoes
                 if (dataGridView1.Rows[i].Cells[1].Value == null)
                     continue;
 
-                DateTime data = DateTime.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString());
+                DateTime data = DateTime.Parse(dataGridView1.Rows[i].Cells[0].Value.ToString().Substring(0, 10));
                 string nsu = "";
-                string autorizacao = dataGridView1.Rows[i].Cells[1].Value.ToString().Trim().PadLeft(6,'0');
+                string autorizacao = dataGridView1.Rows[i].Cells[1].Value.ToString().Trim().PadLeft(6, '0');
                 List<SearchField> filtros = new List<SearchField>()
                 {
                     new SearchField("Autorizacao", autorizacao.Trim().PadLeft(10,'0'), TipoOperacaoEnum.IGUAL),

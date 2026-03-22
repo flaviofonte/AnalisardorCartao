@@ -45,7 +45,7 @@ namespace AnalisardorCartao
                 case "Ticket Relatório Transações":
                 case "VR alimentação":
                 case "Up Brasil":
-                    filtro = "Arquivos válidos|*.xlsx;*.xls";
+                    filtro = "Arquivos válidos|*.xlsx;*.xls;*.csv";
                     break;
                 default:
                     filtro = "Arquivos válidos|*.csv";
@@ -116,7 +116,7 @@ namespace AnalisardorCartao
                     case "Cabal":
                         lerArquivos.DefineLeitor(new Cabal());
                         break;
-                    case "Ticket Relat�rio Transações":
+                    case "Ticket Relatório Transações":
                         lerArquivos.DefineLeitor(new Ticket());
                         break;
                     case "Ticket Extrato de Reembolsos Detalhado":
@@ -140,12 +140,12 @@ namespace AnalisardorCartao
                 }
                 lerArquivos.LerArquivoCartao(TxtArquivo.Text, ref dataGridView1);
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            }
+        }
             catch (Exception ex)
             {
                 MessageBox.Show(this, ex.InnerException == null ? ex.Message : ex.InnerException.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            DesBloquearBotoes();
+        }
+        DesBloquearBotoes();
         }
 
         private void Button4_Click(object sender, EventArgs e)

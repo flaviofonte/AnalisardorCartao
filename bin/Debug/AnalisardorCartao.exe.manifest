@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="AnalisardorCartao.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="AnalisardorCartao" version="2025.12.10.0" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="AnalisardorCartao" version="2026.2.8.0" language="neutral" processorArchitecture="x86" />
     <commandLine file="AnalisardorCartao.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AnalisardorCartao.exe" size="199168">
-      <assemblyIdentity name="AnalisardorCartao" version="2025.12.10.0" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AnalisardorCartao.exe" size="199680">
+      <assemblyIdentity name="AnalisardorCartao" version="2026.2.8.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0/Hr2wn8soD1uw98w+AQSCqY7SRS7bLDbGlQgYymnLM=</dsig:DigestValue>
+        <dsig:DigestValue>jpY9l3+sQSAVJB7wjVt3EA0VvV/6ZQoBXrdJVJN8l2s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

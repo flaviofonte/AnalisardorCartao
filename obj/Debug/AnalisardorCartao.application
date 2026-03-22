@@ -7,14 +7,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="AnalisardorCartao.exe.manifest" size="61937">
+    <dependentAssembly dependencyType="install" codebase="AnalisardorCartao.exe.manifest" size="61933">
       <assemblyIdentity name="AnalisardorCartao.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/4X5UikBVyQRW1Z+RbqS9AGThFq2mZ6/ehAK9W4r+SM=</dsig:DigestValue>
+        <dsig:DigestValue>qB5J0aqf/ARANym14QhMxgiZ2M9xRGQv7YRCqPNmfps=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
